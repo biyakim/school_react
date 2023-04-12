@@ -9,8 +9,14 @@ const Info = () => {
   //컴포넌트가 마운트 될 때만
   //name값이 변경될 때 렌더링이 발생
   useEffect(() => {
-    console.log("마운트 될 때만 실행합니다.");
-  }, [name]);
+    console.log("affect");
+
+    //렌더링 될때마다 뒷정리가 계속 나타나는 것을 확인
+    //뒷정리(return())함수가 호출할 때는 업데이트 되기 직전
+    return () => {
+      console.log("unmount");
+    };
+  }, []);
   const onChangeName = (e) => {
     setName(e.target.value);
     //name값을 변경한다.
