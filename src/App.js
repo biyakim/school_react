@@ -2,28 +2,49 @@ import React, { useRef, useState } from "react";
 
 const App = () => {
   const [count, setCount] = useState(0);
+  //count=0, state 변수
+  //count가 변경될 때마다 렌더링이 발생한다
+  const [renderer, setRenderer] = useState(0);
 
   const countRef = useRef(0);
+  //countRef.current = 0, 전역변수 개념이다
+  //countRef.courrent이 값은 바뀌어도 렌더링이 되지 않는다.
+
+  let countVar = 0;
 
   console.log(countRef);
   console.log("렌더링");
 
-  const increaseCountState = () => {
-    setCount(count + 1);
-    //count값을 1씩 증가하면 count값이 변경될 때 다시 렌더링을 한다
+  const doRendering = () => {
+    setRenderer(renderer);
   };
+
+  // const increaseCountState = () => {
+  //   setCount(count + 1);
+  //   //count값을 1씩 증가하면 count값이 변경될 때 다시 렌더링을 한다
+  // };
 
   const increaseCountRef = () => {
-    countRef.current = countRef.current + 1;
-    console.log("Ref : ", countRef.current);
+    countVar = countVar + 1;
+    console.log("var : ", countVar);
   };
 
+  const increaseVar = () => {
+    countRef.current = countRef.current + 1;
+    console.log(countRef.current);
+  };
+  const printResult = () => {
+    countVar = countVar + 1;
+    console.log(countVar);
+  };
   return (
     <div>
       <p> State : {count} </p>
       <p> Ref : {countRef.current} </p>
-      <button onClick={increaseCountState}>State증가</button>
+      <button onClick={doRendering}>State증가</button>
       <button onClick={increaseCountRef}>Ref증가</button>
+      <button onClick={increaseVar}>Var증가</button>
+      <button onClick={printResult}>Ref Var 값 출력</button>
     </div>
   );
 };
