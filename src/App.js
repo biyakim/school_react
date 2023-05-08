@@ -1,23 +1,36 @@
-import React, { useState, useRef, useEffect } from "react";
+import { createContext, useContext } from "react";
 
-const App = () => {
-  const [count, setCount] = useState(1);
-  const renderCount = useRef(1);
+const MyContext = createContext();
 
-  useEffect(() => {
-    renderCount.current = renderCount.current + 1;
-    //renderCount가 업데이트가 되더라도 렌더링이 발생
-    console.log("렌더링 수", renderCount.current);
-  });
+function App() {
+  return (
+    <MyContext.Provider value="Hello World">
+      
+      <AwesomeComponent />
+    </MyContext.Provider>
+  );
+}
 
-  //useEffect()안에 state변수가 업데이트가 되면
-  //계속해서 useEffect를 호출하기 때문에 무한 loop가 발생한다
+function AwesomeComponent() {
   return (
     <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>올려!!</button>
+      <FirstComponent />
+      <SecondComponent />
+      <ThirdComponent />
     </div>
   );
-};
+}
+function FirstComponent() {
+  const value = useContext(MyContext);
+  return <div> First Component says : {value} </div>;
+}
+function SecondComponent() {
+  const value = useContext(MyContext);
+  return <div> Second Component says : {value} </div>;
+}
+function ThirdComponent() {
+  const value = useContext(MyContext);
+  return <div> Third Component says : {value} </div>;
+}
 
 export default App;
