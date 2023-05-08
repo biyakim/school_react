@@ -2,12 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 
 const App = () => {
   const [count, setCount] = useState(1);
-  const renderCount = useRef(1);
+  const [renderCount, setRenderCount] = useState(1);
 
   useEffect(() => {
-    renderCount.current = renderCount.current + 1;
-    //renderCount가 업데이트가 되더라도 렌더링이 발생
-    console.log("렌더링 수", renderCount.current);
+    console.log("렌더링!! 갯수");
+    setRenderCount(renderCount + 1);
   });
 
   //useEffect()안에 state변수가 업데이트가 되면
